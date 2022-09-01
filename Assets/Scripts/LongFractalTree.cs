@@ -54,11 +54,11 @@ public class LongFractalTree : MonoBehaviour
         go.transform.localScale = new Vector3(newWidth, this.childScale.y - this.childScaleHeightReduction * depth, newWidth);
         go.transform.localPosition = new Vector3(0, go.transform.localScale.y / 2f, 0);
         // Add outline to branches and configure it
-        go.AddComponent<Outline>();
-        Outline outline = go.GetComponent<Outline>();
-        outline.OutlineWidth = 5f;
-        outline.OutlineMode = Outline.Mode.OutlineVisible;
-        outline.OutlineColor = Color.red;
+        // go.AddComponent<Outline>();
+        // Outline outline = go.GetComponent<Outline>();
+        // outline.OutlineWidth = 5f;
+        // outline.OutlineMode = Outline.Mode.OutlineVisible;
+        // outline.OutlineColor = Color.red;
         // We need the rotation, otherwise it doesn't work
         go.transform.localRotation = Quaternion.identity;
         go.GetComponent<MeshRenderer>().material = this.material;
