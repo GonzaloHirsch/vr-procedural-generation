@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c04c05b0fb24d8abde63eb621cfd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1446168817349333022, guid: 77c28de8374434676906e9382e14b834, type: 3}
+  prefab: {fileID: 6744314307719318235, guid: fb569f4ee8b584bc3bbe93822536eef7, type: 3}
   raycastDistance: 100
