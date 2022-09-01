@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec995187f5ff4a6ca4b6ddda414661f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 200
-  zSize: 200
-  zoomFactor: 0.02
+  xSize: 75
+  zSize: 75
+  zoomFactor: 0.05
   noiseScale: 1
   maxZoomFactor: 0.1
-  maxNoiseScale: 20
+  maxNoiseScale: 10
   material: {fileID: 2100000, guid: 8fdb1d7c0b3d94634a692cc6a724baaf, type: 2}

@@ -18,16 +18,18 @@ public class LongFractalTree : MonoBehaviour
     [Header("Rotation")]
     public Vector3 rotationMax = new Vector3(40f, 360f, 40f);
     public Vector3 rotationMin = new Vector3(-40f, 0f, -40f);
+    [Header("Leaves")]
+    public Vector3 leafScale = new Vector3(1, 1, 1);
     [Header("Visualization")]
     public Material material;
 
 
     void Start()
     {
-        RunIteration(this.gameObject, 0);
+        RunIteration(this.gameObject, Vector3.zero, 0);
     }
 
-    private void RunIteration(GameObject parent, int depth)
+    private void RunIteration(GameObject parent, Vector3 rotation, int depth)
     {
         // Create the empty one
         GameObject wrapper = new GameObject("Wrapper");
@@ -38,11 +40,7 @@ public class LongFractalTree : MonoBehaviour
         // Fixed rotation only for the base
         if (depth > 0)
         {
-            wrapper.transform.localRotation = Quaternion.Euler(
-                new Vector3(
-                    Random.Range(this.rotationMin.x, this.rotationMax.x),
-                    Random.Range(this.rotationMin.y, this.rotationMax.y),
-                    Random.Range(this.rotationMin.z, this.rotationMax.z)));
+            wrapper.transform.localRotation = Quaternion.Euler(rotation);
             wrapper.transform.localPosition = new Vector3(0, this.childScale.y - this.childScaleHeightReduction * depth, 0);
         }
 
@@ -53,12 +51,6 @@ public class LongFractalTree : MonoBehaviour
         float newWidth = this.childScale.x - this.childScaleWidthReduction * depth;
         go.transform.localScale = new Vector3(newWidth, this.childScale.y - this.childScaleHeightReduction * depth, newWidth);
         go.transform.localPosition = new Vector3(0, go.transform.localScale.y / 2f, 0);
-        // Add outline to branches and configure it
-        // go.AddComponent<Outline>();
-        // Outline outline = go.GetComponent<Outline>();
-        // outline.OutlineWidth = 5f;
-        // outline.OutlineMode = Outline.Mode.OutlineVisible;
-        // outline.OutlineColor = Color.red;
         // We need the rotation, otherwise it doesn't work
         go.transform.localRotation = Quaternion.identity;
         go.GetComponent<MeshRenderer>().material = this.material;
@@ -68,20 +60,48 @@ public class LongFractalTree : MonoBehaviour
         // Spawn children
         if (depth <= this.maxDepth)
         {
-            for (int i = 0; i < this.childLimit - depth; i++)
+            for (int i = 0, n = this.childLimit - depth; i < n; i++)
             {
                 // Spawn child if within probability
                 if (Random.Range(0f, 1f) < this.spawnProbability)
                 {
-                    StartCoroutine(this.WaitForChild(this.waitTime, wrapper, depth));
+                    Vector3 newRotation = new Vector3(
+                        Random.Range(this.rotationMin.x, this.rotationMax.x),
+                        this.rotationMin.y + i * (this.rotationMax.y - this.rotationMin.y) / n,
+                        Random.Range(this.rotationMin.z, this.rotationMax.z)
+                    );
+                    StartCoroutine(this.WaitForChild(this.waitTime, wrapper, newRotation, depth));
                 }
             }
+        } 
+        // We spawn the leaves
+        else {
+            StartCoroutine(this.WaitForLeaf(this.waitTime, go));
         }
     }
 
-    IEnumerator WaitForChild(float time, GameObject parent, int depth)
+    private void RunLeafIteration(GameObject parent)
+    {
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        go.name = "Leaf";
+        go.transform.parent = parent.transform;    // Empty is always parent of the object itself
+        go.transform.localScale = this.leafScale;
+        go.transform.localPosition = new Vector3(0, go.transform.localScale.y / 2f + parent.transform.localScale.y / 2f, 0);
+        // We need the rotation, otherwise it doesn't work
+        go.transform.localRotation = Quaternion.identity;
+        go.GetComponent<MeshRenderer>().material = this.material;
+        go.GetComponent<BoxCollider>().enabled = false;    // Disable collider
+    }
+
+    IEnumerator WaitForChild(float time, GameObject parent, Vector3 rotation, int depth)
     {
         yield return new WaitForSeconds(time);
-        this.RunIteration(parent, depth);
+        this.RunIteration(parent, rotation, depth);
+    }
+    
+    IEnumerator WaitForLeaf(float time, GameObject parent)
+    {
+        yield return new WaitForSeconds(time);
+        this.RunLeafIteration(parent);
     }
 }
