@@ -21,12 +21,16 @@ public class PlayerController : MonoBehaviour
     // Raycast mask, only checks for collisions on the given layers, saves up computations
     private int raycastMask;
 
-    void Awake() {
+    void Awake()
+    {
         // Create mask by setting the explicit tags
         this.raycastMask = LayerMask.GetMask(Constants.INTERACTABLE_TAG, Constants.TELEPORT_TAG, Constants.PROP_TAG);
+        // Get the teleport marker
+        this.teleportMarker = GameObject.FindGameObjectWithTag(Constants.TELEPORT_PROP_TAG);
     }
 
-    void Start() {
+    void Start()
+    {
         // Adjust initial position to be on top of the ground
         this.AdjustInitialPosition();
         // Store the initial position
@@ -57,12 +61,16 @@ public class PlayerController : MonoBehaviour
 
         // Set marker enabled only if the location can be teleported to
         this.markerEnabled = gazedAtObject != null && Vector3.Distance(hit.point, this.initialPosition) <= this.absoluteTeleportDistance && gazedAtObject.CompareTag(Constants.TELEPORT_TAG);
-        this.teleportMarker.SetActive(this.markerEnabled);  // Activate the teleport marker only if the marker should be enabled
+        if (this.teleportMarker != null) this.teleportMarker.SetActive(this.markerEnabled);  // Activate the teleport marker only if the marker should be enabled
         // If the marker is enabled, calculate the position and set it
-        if (this.markerEnabled) {
+        if (this.markerEnabled)
+        {
             this.nextPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            this.teleportMarker.transform.position = this.nextPosition;
-            this.teleportMarker.transform.up = hit.normal;
+            if (this.teleportMarker != null)
+            {
+                this.teleportMarker.transform.position = this.nextPosition;
+                this.teleportMarker.transform.up = hit.normal;
+            }
         }
 
         // Checks for screen touches.
@@ -70,9 +78,12 @@ public class PlayerController : MonoBehaviour
         {
             // If the trigger is pressed while looking at a teleport-enabled place
             // If marker is enabled, it's because the position is valid so it can teleport
-            if (this.markerEnabled) {
+            if (this.markerEnabled)
+            {
                 this.transform.position = this.nextPosition;    // Use precomputed position from marker
-            } else {
+            }
+            else
+            {
                 gazedAtObject?.SendMessage("OnPointerClick");
             }
         }
@@ -80,11 +91,13 @@ public class PlayerController : MonoBehaviour
 
     // Cannot send gaze events to teleportable surfaces
     // Check that the target object is not teleportable
-    private bool canSendGazeEvents() {
+    private bool canSendGazeEvents()
+    {
         return gazedAtObject != null && !gazedAtObject.CompareTag(Constants.TELEPORT_TAG);
     }
 
-    private void AdjustInitialPosition() {
+    private void AdjustInitialPosition()
+    {
         // Throw ray up and down to find the position of the ground
         bool located = false;
         RaycastHit hit;
@@ -93,7 +106,8 @@ public class PlayerController : MonoBehaviour
             this.transform.position = hit.point;
             located = true;
         }
-        if (!located && Physics.Raycast(this.transform.position, Vector3.up, out hit, 100f)) {
+        if (!located && Physics.Raycast(this.transform.position, Vector3.up, out hit, 100f))
+        {
             this.transform.position = hit.point;
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-public class MeshGenerator : MonoBehaviour
+public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
 {
     private Mesh mesh;
     private Vector3[] vertices;
@@ -25,7 +25,7 @@ public class MeshGenerator : MonoBehaviour
     [Header("Visual")]
     public Material material;
 
-    void Awake()
+    public void GenerateTerrain()
     {
         // Create and set mesh
         this.mesh = new Mesh();
