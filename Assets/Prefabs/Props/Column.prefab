@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125986674726069577}
   - component: {fileID: -6166314362983103964}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Column
   m_TagString: Prop
   m_Icon: {fileID: 0}
@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -105,9 +109,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6a1ffb4ec8c264b8bad1f47b7cb7ca89, type: 2}
+    - target: {fileID: 243041194690276544, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
       propertyPath: m_Name
       value: column
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9a79234b7e3f48e8a3d2f106f14084d, type: 3}
