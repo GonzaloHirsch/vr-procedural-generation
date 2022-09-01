@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 512081914280321637}
   - component: {fileID: 512081914280321638}
   - component: {fileID: 512081914280321947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MeshGenerator
-  m_TagString: Untagged
+  m_TagString: TeleportEnabled
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

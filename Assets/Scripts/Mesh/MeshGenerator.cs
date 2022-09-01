@@ -25,8 +25,7 @@ public class MeshGenerator : MonoBehaviour
     [Header("Visual")]
     public Material material;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Create and set mesh
         this.mesh = new Mesh();
@@ -41,6 +40,10 @@ public class MeshGenerator : MonoBehaviour
         // Creating the mesh points
         this.CreateMesh();
         this.UpdateMesh();
+        // Add the mesh collider
+        this.gameObject.AddComponent<MeshCollider>();
+        MeshCollider mc = this.gameObject.GetComponent<MeshCollider>();
+        mc.sharedMesh = this.mesh;
     }
 
     void CreateMesh()
@@ -94,6 +97,7 @@ public class MeshGenerator : MonoBehaviour
         this.mesh.triangles = this.triangles;
         this.mesh.uv = this.uv;
         this.mesh.RecalculateNormals();
+        this.mesh.UploadMeshData(false);
     }
 
     /* void OnDrawGizmos()
