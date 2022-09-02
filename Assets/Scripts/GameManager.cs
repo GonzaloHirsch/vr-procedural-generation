@@ -4,7 +4,9 @@ public class GameManager : Framework.MonoBehaviorSingleton<GameManager>
 {
     [Header("Player")]
     public GameObject playerPrefab;
-    public Vector3 playerInitialPosition = Vector3.zero;
+    private GameObject playerInstance;
+    private PlayerController playerController;
+    public Vector3 playerInitialPosition = new Vector3(0, 2, 0);
 
     void Start() {
         // Set Up all the map
@@ -21,6 +23,15 @@ public class GameManager : Framework.MonoBehaviorSingleton<GameManager>
     }
 
     private void SetupPlayer() {
-        GameObject.Instantiate(playerPrefab, this.playerInitialPosition, Quaternion.identity);
+        this.playerInstance = GameObject.Instantiate(playerPrefab, this.playerInitialPosition, Quaternion.identity);
+        this.playerController = this.playerInstance.GetComponent<PlayerController>();
+    }
+
+    public void UseTeleportMode() {
+        this.playerController.ChangePlayerMode(Constants.PLAYER_MODES.TELEPORT);
+    }
+    
+    public void UseTreeMode() {
+        this.playerController.ChangePlayerMode(Constants.PLAYER_MODES.TREE);
     }
 }

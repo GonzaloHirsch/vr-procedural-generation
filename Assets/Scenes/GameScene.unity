@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &174097690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484439845640683429, guid: 5c789731867894a21854efdf3e1a25b2, type: 3}
+  m_PrefabInstance: {fileID: 4484439845814778559}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2232f95b37046cc83e84046dabbcdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1306362226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237,6 +248,87 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3263fa65da93e4ac08895db1c3170713, type: 3}
+--- !u!1001 &1734505868
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1461345919538747932, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 174097690}
+    - target: {fileID: 1461345919538747932, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseTeleportMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461345919538747932, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081694302212063530, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851859982168897565, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 174097690}
+    - target: {fileID: 2851859982168897565, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseTreeMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851859982168897565, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4526025617554432198, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
+      propertyPath: m_Name
+      value: FloatingButtons
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2488484b7173e4ec4856c4f2cef92215, type: 3}
 --- !u!1001 &2967575928100579723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,6 +383,10 @@ PrefabInstance:
     - target: {fileID: 2967575926310738843, guid: a51cc85195b854202a0110785d9e5e10, type: 3}
       propertyPath: m_Name
       value: TeleportMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967575926310738843, guid: a51cc85195b854202a0110785d9e5e10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51cc85195b854202a0110785d9e5e10, type: 3}

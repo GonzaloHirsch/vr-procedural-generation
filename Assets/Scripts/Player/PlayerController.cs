@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPosition;
     // Reference to the teleport marker
     public GameObject teleportMarker = null;
+    private TeleportManager teleportManager;
     [Header("Camera")]
     // Keep track of the camera offset in order to account for it in the raycast
     public GameObject cameraOffset = null;
@@ -20,13 +21,16 @@ public class PlayerController : MonoBehaviour
     private Vector3 nextPosition = Vector3.zero;
     // Raycast mask, only checks for collisions on the given layers, saves up computations
     private int raycastMask;
+    [Header("Modes")]
+    private Constants.PLAYER_MODES currentMode = Constants.PLAYER_MODES.TELEPORT;
 
     void Awake()
     {
         // Create mask by setting the explicit tags
         this.raycastMask = LayerMask.GetMask(Constants.INTERACTABLE_TAG, Constants.TELEPORT_TAG, Constants.PROP_TAG);
-        // Get the teleport marker
+        // Get the teleport marker and the component
         this.teleportMarker = GameObject.FindGameObjectWithTag(Constants.TELEPORT_PROP_TAG);
+        this.teleportManager = this.teleportMarker.GetComponent<TeleportManager>();
     }
 
     void Start()
@@ -60,7 +64,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // Set marker enabled only if the location can be teleported to
-        this.markerEnabled = gazedAtObject != null && Vector3.Distance(hit.point, this.initialPosition) <= this.absoluteTeleportDistance && gazedAtObject.CompareTag(Constants.TELEPORT_TAG);
+        // Trees can only be planted on teleportable surfaces
+        this.markerEnabled = gazedAtObject != null && gazedAtObject.CompareTag(Constants.TELEPORT_TAG);
+        if (this.currentMode == Constants.PLAYER_MODES.TELEPORT) {
+            this.markerEnabled = this.markerEnabled && Vector3.Distance(hit.point, this.initialPosition) <= this.absoluteTeleportDistance;
+        }
         if (this.teleportMarker != null) this.teleportMarker.SetActive(this.markerEnabled);  // Activate the teleport marker only if the marker should be enabled
         // If the marker is enabled, calculate the position and set it
         if (this.markerEnabled)
@@ -68,8 +76,10 @@ public class PlayerController : MonoBehaviour
             this.nextPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             if (this.teleportMarker != null)
             {
-                this.teleportMarker.transform.position = this.nextPosition;
-                this.teleportMarker.transform.up = hit.normal;
+                // Set the position
+                this.teleportManager.ChangePosition(this.nextPosition, hit.normal);
+                // Set the material
+                this.teleportManager.ChangeMarkerMode(this.currentMode);
             }
         }
 
@@ -80,11 +90,24 @@ public class PlayerController : MonoBehaviour
             // If marker is enabled, it's because the position is valid so it can teleport
             if (this.markerEnabled)
             {
-                this.transform.position = this.nextPosition;    // Use precomputed position from marker
+                switch (this.currentMode) {
+                    case Constants.PLAYER_MODES.TELEPORT:
+                        this.transform.position = this.nextPosition;    // Use precomputed position from marker
+                        break;
+                    case Constants.PLAYER_MODES.TREE:
+                        // SPAWN TREE
+                        break;
+                }
             }
             else
             {
-                gazedAtObject?.SendMessage("OnPointerClick");
+                try {
+                    gazedAtObject?.SendMessage("OnPointerClick");
+                }
+                catch (System.Exception)
+                {
+                    // Do nothing, we don't care about the exceptions
+                }
             }
         }
     }
@@ -110,6 +133,10 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.position = hit.point;
         }
+    }
+
+    public void ChangePlayerMode(Constants.PLAYER_MODES mode) {
+        this.currentMode = mode;
     }
 
     // Debug, dibuja un rayo en la dirección donde está mirando la cámara

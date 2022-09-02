@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 741198647426833878, guid: ba84c92054cad485a9083101313497e3, type: 3}
-  playerInitialPosition: {x: 0, y: 0, z: 0}
+  playerInitialPosition: {x: 0, y: 2, z: 0}
