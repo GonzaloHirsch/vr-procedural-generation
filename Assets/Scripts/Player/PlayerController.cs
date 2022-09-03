@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private int raycastMask;
     [Header("Modes")]
     private Constants.PLAYER_MODES currentMode = Constants.PLAYER_MODES.TELEPORT;
+    [Header("Initial Position")]
+    public bool adjustInitialPosition = true;
 
     void Awake()
     {
@@ -30,13 +32,13 @@ public class PlayerController : MonoBehaviour
         this.raycastMask = LayerMask.GetMask(Constants.INTERACTABLE_TAG, Constants.TELEPORT_TAG, Constants.PROP_TAG);
         // Get the teleport marker and the component
         this.teleportMarker = GameObject.FindGameObjectWithTag(Constants.TELEPORT_PROP_TAG);
-        this.teleportManager = this.teleportMarker.GetComponent<TeleportManager>();
+        this.teleportManager = this.teleportMarker?.GetComponent<TeleportManager>();
     }
 
     void Start()
     {
         // Adjust initial position to be on top of the ground
-        this.AdjustInitialPosition();
+        if (this.adjustInitialPosition) this.AdjustInitialPosition();
         // Store the initial position
         this.initialPosition = this.transform.position;
     }
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if (this.markerEnabled)
         {
             this.nextPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            if (this.teleportMarker != null)
+            if (this.teleportMarker != null && this.teleportManager != null)
             {
                 // Set the position
                 this.teleportManager.ChangePosition(this.nextPosition, hit.normal);

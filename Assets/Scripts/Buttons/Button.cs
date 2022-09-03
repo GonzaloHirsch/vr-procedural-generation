@@ -4,15 +4,18 @@ using System.Collections;
 
 public class Button : MonoBehaviour
 {
+    [Header("Movement")]
     public float movementTime = 2f;
     public float movementDistance = 0.01f;
+    public bool doesMove = true;
     private float intialTime;
     private Vector3 initialPosition;
-    private bool isClicked = false;
-    public UnityEvent onClick;
     private float timeDelta;
     private float newY;
     private float m;
+    [Header("Event")]
+    private bool isClicked = false;
+    public UnityEvent onClick;
 
     private void StoreInitialPosition() {
         this.initialPosition = this.transform.position;
@@ -26,7 +29,7 @@ public class Button : MonoBehaviour
             this.StoreInitialPosition();
             this.isClicked = true;
             this.intialTime = Time.time;
-            StartCoroutine(this.StopButton());
+            if (this.doesMove) StartCoroutine(this.StopButton());
             if (onClick != null) onClick.Invoke();
         }
     }
@@ -34,7 +37,7 @@ public class Button : MonoBehaviour
     // Handle button movement
     void Update()
     {
-        if (isClicked) this.HandleButtonMovement();
+        if (this.isClicked && this.doesMove) this.HandleButtonMovement();
     }
 
     private void HandleButtonMovement()
