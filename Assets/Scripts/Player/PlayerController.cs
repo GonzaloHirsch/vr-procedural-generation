@@ -68,7 +68,8 @@ public class PlayerController : MonoBehaviour
         // Set marker enabled only if the location can be teleported to
         // Trees can only be planted on teleportable surfaces
         this.markerEnabled = gazedAtObject != null && gazedAtObject.CompareTag(Constants.TELEPORT_TAG);
-        if (this.currentMode == Constants.PLAYER_MODES.TELEPORT) {
+        if (this.currentMode == Constants.PLAYER_MODES.TELEPORT)
+        {
             this.markerEnabled = this.markerEnabled && Vector3.Distance(hit.point, this.initialPosition) <= this.absoluteTeleportDistance;
         }
         if (this.teleportMarker != null) this.teleportMarker.SetActive(this.markerEnabled);  // Activate the teleport marker only if the marker should be enabled
@@ -92,7 +93,8 @@ public class PlayerController : MonoBehaviour
             // If marker is enabled, it's because the position is valid so it can teleport
             if (this.markerEnabled)
             {
-                switch (this.currentMode) {
+                switch (this.currentMode)
+                {
                     case Constants.PLAYER_MODES.TELEPORT:
                         this.transform.position = this.nextPosition;    // Use precomputed position from marker
                         break;
@@ -103,13 +105,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                try {
-                    gazedAtObject?.SendMessage("OnPointerClick");
-                }
-                catch (System.Exception)
-                {
-                    // Do nothing, we don't care about the exceptions
-                }
+                // Send options to not require receiver just in case, to avoid the error
+                gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
             }
         }
     }
@@ -137,7 +134,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ChangePlayerMode(Constants.PLAYER_MODES mode) {
+    public void ChangePlayerMode(Constants.PLAYER_MODES mode)
+    {
         this.currentMode = mode;
     }
 
