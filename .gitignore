@@ -64,4 +64,5 @@ DEPLOY*
 !.vscode/extensions.json
 
 
-ProjectSettings/
+ProjectSettings/*
+!ProjectSettings/TagManager.asset
