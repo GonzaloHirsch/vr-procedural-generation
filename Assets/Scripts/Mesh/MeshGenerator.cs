@@ -24,8 +24,7 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
     private float maxDistance;
     [Header("Visual")]
     public Material material;
-
-    public int trees =0;
+    public Vector3 initialColor, finalColor;
 
     public void GenerateTerrain()
     {
@@ -33,6 +32,7 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
         this.mesh = new Mesh();
         this.GetComponent<MeshFilter>().mesh = this.mesh;
         // Edit material tiling
+        this.UpdateMeshColor(0f);
         this.material.mainTextureScale = new Vector2(this.xSize, this.zSize);
         this.GetComponent<MeshRenderer>().material = this.material;
         // Move the mesh to the center and compute the center point
@@ -102,14 +102,17 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
         this.mesh.UploadMeshData(false);
     }
 
-    private void Update()
+    public void UpdateMeshColor(float completionPercentage)
     {
-        float rb = Mathf.Max(255 - 5 * trees, 0) / 255f;
-        Color customColor = new Color(rb , Mathf.Min((150 + 10 * trees) / 255f,1f), rb, 0f);
-        material.SetColor("_Color", customColor);
+        // Simple linear interpolation
+        Vector3 color = ((this.finalColor - this.initialColor) * Mathf.Clamp(completionPercentage, 0f, 1f) + this.initialColor)/255f;
+        // Color customColor = n
+        material.SetColor("_Color", new Color(color.x, color.y, color.z));
     }
 
-    /* void OnDrawGizmos()
+    /* 
+    // Debug gizmos for mesh points
+    void OnDrawGizmos()
     {
         if (this.vertices != null)
         {

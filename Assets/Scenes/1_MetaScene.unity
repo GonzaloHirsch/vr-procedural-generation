@@ -3914,7 +3914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementTime: 0
   movementDistance: 0
-  doesMove: 1
+  doesMove: 0
   onClick:
     m_PersistentCalls:
       m_Calls:

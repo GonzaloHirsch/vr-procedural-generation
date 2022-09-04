@@ -103,3 +103,5 @@ MonoBehaviour:
   maxZoomFactor: 0.1
   maxNoiseScale: 10
   material: {fileID: 2100000, guid: 8fdb1d7c0b3d94634a692cc6a724baaf, type: 2}
+  initialColor: {x: 255, y: 0, z: 255}
+  finalColor: {x: 0, y: 255, z: 0}

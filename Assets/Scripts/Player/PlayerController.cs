@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         // Create mask by setting the explicit tags
-        this.raycastMask = LayerMask.GetMask(Constants.INTERACTABLE_TAG, Constants.TELEPORT_TAG, Constants.PROP_TAG);
+        this.raycastMask = LayerMask.GetMask(Constants.INTERACTABLE_TAG, Constants.TELEPORT_TAG, Constants.PROP_TAG, Constants.UI_TAG);
         // Get the teleport marker and the component
         this.teleportMarker = GameObject.FindGameObjectWithTag(Constants.TELEPORT_PROP_TAG);
         this.teleportManager = this.teleportMarker?.GetComponent<TeleportManager>();
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 // Send options to not require receiver just in case, to avoid the error
-                gazedAtObject?.SendMessage("OnPointerClick", SendMessageOptions.DontRequireReceiver);
+                gazedAtObject?.SendMessage("OnPointerClick", null, SendMessageOptions.DontRequireReceiver);
             }
         }
     }

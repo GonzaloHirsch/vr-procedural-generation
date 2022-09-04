@@ -4,6 +4,7 @@ public class TreeManager : Framework.MonoBehaviorSingleton<TreeManager>
 {
     [Header("Prefab")]
     public GameObject treePrefab;
+    [SerializeField]
     private int treeCount = 0;
 
 
@@ -15,5 +16,9 @@ public class TreeManager : Framework.MonoBehaviorSingleton<TreeManager>
     // Used to notify about new trees
     public void TreePlanted() {
         this.treeCount++;
+    }
+
+    public int GetTreeCount() {
+        return this.treeCount;
     }
 }

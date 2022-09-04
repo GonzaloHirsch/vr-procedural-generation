@@ -91,6 +91,8 @@ public class LongFractalTree : MonoBehaviour
         go.transform.localRotation = Quaternion.identity;
         go.GetComponent<MeshRenderer>().material = this.material;
         go.GetComponent<BoxCollider>().enabled = false;    // Disable collider
+        // Once the leaves are loaded, it means that the tree finished growing, we count then
+        TreeManager.Instance.TreePlanted();
     }
 
     IEnumerator WaitForChild(float time, GameObject parent, Vector3 rotation, int depth)
