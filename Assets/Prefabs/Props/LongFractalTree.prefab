@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a29d39a76cdd4a409145661e2d2965b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnProbability: 0.85
-  waitTime: 0.5
+  spawnProbability: 0.9
+  waitTime: 2.5
   maxDepth: 3
   childScale: {x: 0.4, y: 2, z: 0.4}
   childLimit: 5
@@ -54,4 +54,5 @@ MonoBehaviour:
   rotationMax: {x: 40, y: 360, z: 40}
   rotationMin: {x: -40, y: 0, z: -40}
   leafScale: {x: 7, y: 0.2, z: 7}
+  eventEmitted: 0
   material: {fileID: 2100000, guid: 19ed1ac40c4c94ec4858a242165d6e18, type: 2}

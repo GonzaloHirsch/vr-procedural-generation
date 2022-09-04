@@ -20,6 +20,7 @@ public class LongFractalTree : MonoBehaviour
     public Vector3 rotationMin = new Vector3(-40f, 0f, -40f);
     [Header("Leaves")]
     public Vector3 leafScale = new Vector3(1, 1, 1);
+    public bool eventEmitted = false;
     [Header("Visualization")]
     public Material material;
 
@@ -91,8 +92,11 @@ public class LongFractalTree : MonoBehaviour
         go.transform.localRotation = Quaternion.identity;
         go.GetComponent<MeshRenderer>().material = this.material;
         go.GetComponent<BoxCollider>().enabled = false;    // Disable collider
-        // Once the leaves are loaded, it means that the tree finished growing, we count then
-        TreeManager.Instance.TreePlanted();
+        if (!this.eventEmitted) {
+            // Once the leaves are loaded, it means that the tree finished growing, we count then
+            TreeManager.Instance.TreePlanted();
+            this.eventEmitted = true;
+        }
     }
 
     IEnumerator WaitForChild(float time, GameObject parent, Vector3 rotation, int depth)

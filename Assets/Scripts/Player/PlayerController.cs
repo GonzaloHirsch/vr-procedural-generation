@@ -99,7 +99,8 @@ public class PlayerController : MonoBehaviour
                         this.transform.position = this.nextPosition;    // Use precomputed position from marker
                         break;
                     case Constants.PLAYER_MODES.TREE:
-                        // SPAWN TREE
+                        GameObject newTree = GameObject.Instantiate(TreeManager.Instance.GetTreeToPlant(), this.nextPosition, Quaternion.identity);
+                        newTree.transform.up = hit.normal;
                         break;
                 }
             }

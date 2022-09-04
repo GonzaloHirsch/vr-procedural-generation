@@ -24,9 +24,7 @@ public class RealWorldManager : Framework.MonoBehaviorSingleton<RealWorldManager
         {
             GameState.Instance.isSecretFound = true;
             // Prepares the secret ending
-            Debug.Log("SCRET ENDING");
             this.secretDoor.SetActive(true);
         }
-        Debug.Log("TRIED SECRET ENDING");
     }
 }
