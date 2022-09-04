@@ -3361,6 +3361,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1957944929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957944927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6855dca66757141e9a904316684b60b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sampleLength: 16384
+  intensityLimits: {x: 6, y: 11}
+  loudnessLimits: {x: 0.00337, y: 0.009}
 --- !u!1 &1984597871
 GameObject:
   m_ObjectHideFlags: 0
