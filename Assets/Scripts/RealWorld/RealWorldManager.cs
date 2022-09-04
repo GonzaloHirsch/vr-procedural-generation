@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class RealWorldManager : Framework.MonoBehaviorSingleton<RealWorldManager>
 {
+    public GameObject secretDoor;
+
+    void Start() {
+        this.secretDoor.SetActive(GameState.Instance.isSecretFound);
+    }
+
     public void PlayGame()
     {
         // Set the game as played, that way when the user is back it's ready
@@ -16,8 +22,10 @@ public class RealWorldManager : Framework.MonoBehaviorSingleton<RealWorldManager
         // Only allow the player to get the secret ending after playing the videogame
         if (GameState.Instance.isVideogamePlayed)
         {
+            GameState.Instance.isSecretFound = true;
             // Prepares the secret ending
             Debug.Log("SCRET ENDING");
+            this.secretDoor.SetActive(true);
         }
         Debug.Log("TRIED SECRET ENDING");
     }
