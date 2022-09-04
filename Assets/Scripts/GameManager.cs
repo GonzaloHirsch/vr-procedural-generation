@@ -37,11 +37,14 @@ public class GameManager : Framework.MonoBehaviorSingleton<GameManager>
         this.currentTreeCount = TreeManager.Instance.GetTreeCount();
         if (this.currentTreeCount > this.previousTreeCount) {
             MeshGenerator.Instance.UpdateMeshColor((float)this.currentTreeCount / this.treeTarget);
+            RisingSun.Instance.MoveSun((float)this.currentTreeCount / this.treeTarget);
             this.previousTreeCount = this.currentTreeCount;
         }
         if (this.currentTreeCount >= this.treeTarget && !this.stayInVR && !this.gameOverPanel.activeSelf) {
             this.gameOverPanel.SetActive(true);
             this.gameOverPanel.transform.LookAt(this.playerInstance.transform.position, this.gameOverPanel.transform.up);
+            Vector3 rotation = this.gameOverPanel.transform.rotation.eulerAngles;
+            this.gameOverPanel.transform.rotation = Quaternion.Euler(new Vector3(0f, rotation.y, 0f));
         }
     }
 
