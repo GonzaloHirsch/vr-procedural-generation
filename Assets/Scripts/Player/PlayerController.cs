@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     // Reference to the teleport marker
     public GameObject teleportMarker = null;
     private TeleportManager teleportManager;
+    private TreeManager treeManager;
+
     [Header("Camera")]
     // Keep track of the camera offset in order to account for it in the raycast
     public GameObject cameraOffset = null;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool markerEnabled = false;
     // Save up computation of the next position
     private Vector3 nextPosition = Vector3.zero;
+    private Vector3 treePosition = Vector3.zero;
     // Raycast mask, only checks for collisions on the given layers, saves up computations
     private int raycastMask;
     [Header("Modes")]
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
         // Get the teleport marker and the component
         this.teleportMarker = GameObject.FindGameObjectWithTag(Constants.TELEPORT_PROP_TAG);
         this.teleportManager = this.teleportMarker?.GetComponent<TeleportManager>();
+        this.treeManager = GameObject.Find("TreeManager").GetComponent<TreeManager>();
     }
 
     void Start()
@@ -47,11 +51,13 @@ public class PlayerController : MonoBehaviour
     {
         // Casts ray towards camera's forward direction, to detect if a GameObject is being gazed at
         RaycastHit hit;
+        // Debug.Log("In Update");
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDistance, this.raycastMask))
         {
             // GameObject detected in front of the camera.
             if (gazedAtObject != hit.transform.gameObject)
             {
+                Debug.Log("Raycast hit!");
                 // New GameObject.
                 // if (this.canSendGazeEvents()) gazedAtObject?.SendMessage("OnPointerExit");
                 gazedAtObject = hit.transform.gameObject;
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
             // if (this.canSendGazeEvents()) gazedAtObject?.SendMessage("OnPointerExit");
             gazedAtObject = null;
         }
+        // Debug.Log(gazedAtObject);
 
         // Set marker enabled only if the location can be teleported to
         // Trees can only be planted on teleportable surfaces
@@ -72,7 +79,11 @@ public class PlayerController : MonoBehaviour
         {
             this.markerEnabled = this.markerEnabled && Vector3.Distance(hit.point, this.initialPosition) <= this.absoluteTeleportDistance;
         }
-        if (this.teleportMarker != null) this.teleportMarker.SetActive(this.markerEnabled);  // Activate the teleport marker only if the marker should be enabled
+        // Activate the teleport marker only if the marker should be enabled
+        if (this.teleportMarker != null) {
+            this.teleportMarker.SetActive(this.markerEnabled);
+        }
+        
         // If the marker is enabled, calculate the position and set it
         if (this.markerEnabled)
         {
@@ -89,6 +100,7 @@ public class PlayerController : MonoBehaviour
         // Checks for screen touches.
         if (ActionMapper.GetClick())
         {
+            Debug.Log("Click detected");
             // If the trigger is pressed while looking at a teleport-enabled place
             // If marker is enabled, it's because the position is valid so it can teleport
             if (this.markerEnabled)
@@ -99,7 +111,8 @@ public class PlayerController : MonoBehaviour
                         this.transform.position = this.nextPosition;    // Use precomputed position from marker
                         break;
                     case Constants.PLAYER_MODES.TREE:
-                        // SPAWN TREE
+                        Debug.Log(this.treeManager);
+                        this.treeManager.PlantTree(hit);
                         break;
                 }
             }

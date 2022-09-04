@@ -38,4 +38,7 @@ public class TeleportManager : Framework.MonoBehaviorSingleton<TeleportManager>
             r.material = m;
         }
     }
+    private void ChangePrefab(GameObject o){
+        //TODO: Implement mechanismo to swap the marker between the two types (treeMarker and teleportMarker)
+    }
 }

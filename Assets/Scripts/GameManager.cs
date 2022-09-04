@@ -28,10 +28,12 @@ public class GameManager : Framework.MonoBehaviorSingleton<GameManager>
     }
 
     public void UseTeleportMode() {
+        Debug.Log("Using Teleport mode");
         this.playerController.ChangePlayerMode(Constants.PLAYER_MODES.TELEPORT);
     }
     
     public void UseTreeMode() {
+        Debug.Log("Using Tree mode");
         this.playerController.ChangePlayerMode(Constants.PLAYER_MODES.TREE);
     }
 }
