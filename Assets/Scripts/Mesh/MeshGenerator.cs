@@ -25,6 +25,8 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
     [Header("Visual")]
     public Material material;
 
+    public int trees =0;
+
     public void GenerateTerrain()
     {
         // Create and set mesh
@@ -98,6 +100,13 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
         this.mesh.uv = this.uv;
         this.mesh.RecalculateNormals();
         this.mesh.UploadMeshData(false);
+    }
+
+    private void Update()
+    {
+        float rb = Mathf.Max(255 - 5 * trees, 0) / 255f;
+        Color customColor = new Color(rb , Mathf.Min((150 + 10 * trees) / 255f,1f), rb, 0f);
+        material.SetColor("_Color", customColor);
     }
 
     /* void OnDrawGizmos()
