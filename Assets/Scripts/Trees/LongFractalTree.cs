@@ -37,6 +37,7 @@ public class LongFractalTree : MonoBehaviour
         wrapper.transform.parent = parent.transform;
         wrapper.transform.localPosition = Vector3.zero;
         wrapper.transform.rotation = Quaternion.identity;
+        wrapper.transform.localRotation = Quaternion.identity;
         wrapper.transform.localScale = Vector3.one;
         // Fixed rotation only for the base
         if (depth > 0)
