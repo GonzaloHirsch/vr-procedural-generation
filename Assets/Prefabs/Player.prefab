@@ -154,6 +154,7 @@ MonoBehaviour:
   absoluteTeleportDistance: 25
   teleportMarker: {fileID: 0}
   cameraOffset: {fileID: 741198648250558919}
+  adjustInitialPosition: 1
 --- !u!1 &741198648250558919
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &271743061468731644
 Transform:
   m_ObjectHideFlags: 0
