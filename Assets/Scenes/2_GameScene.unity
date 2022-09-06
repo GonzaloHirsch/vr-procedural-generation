@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeshGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 512081914280321947, guid: 3263fa65da93e4ac08895db1c3170713, type: 3}
+      propertyPath: maxNoiseScale
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3263fa65da93e4ac08895db1c3170713, type: 3}
 --- !u!1001 &1734505868

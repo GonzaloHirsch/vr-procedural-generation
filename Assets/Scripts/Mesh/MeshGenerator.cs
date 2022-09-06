@@ -14,6 +14,7 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
     [Header("Size")]
     public int xSize = 20;
     public int zSize = 20;
+    private int offsetLimits = 999999;
     [Header("Noise")]
     public float zoomFactor = 0.3f;
     public float noiseScale = 2f;
@@ -55,6 +56,9 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
         this.uv = new Vector2[this.vertices.Length];
         // Create all the vertices
         float vertexY, distance, factor;
+        // Sample points for the noise, to generate randomness
+        int xSample = Random.Range(-this.offsetLimits, this.offsetLimits);
+        int zSample = Random.Range(-this.offsetLimits, this.offsetLimits);
         for (int i = 0, z = 0; z <= this.zSize; z++)
         {
             for (int x = 0; x <= this.xSize; x++)
@@ -65,7 +69,7 @@ public class MeshGenerator : Framework.MonoBehaviorSingleton<MeshGenerator>
                 this.currentZoomFactor = this.zoomFactor + ((this.maxZoomFactor - this.zoomFactor) * factor);
                 this.currentNoiseFactor = this.noiseScale + ((this.maxNoiseScale - this.noiseScale) * factor);
                 // Get Y based on the noise
-                vertexY = Mathf.PerlinNoise(x * this.currentZoomFactor, z * this.currentZoomFactor) * this.currentNoiseFactor;
+                vertexY = Mathf.PerlinNoise(xSample + x * this.currentZoomFactor, zSample + z * this.currentZoomFactor) * this.currentNoiseFactor;
                 // Create the vertex
                 this.vertices[i] = new Vector3(x, vertexY, z);
                 // Setting the UV points
