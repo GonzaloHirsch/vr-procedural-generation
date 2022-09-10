@@ -62,7 +62,3 @@ DEPLOY*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-
-ProjectSettings/*
-!ProjectSettings/TagManager.asset
